@@ -4,3 +4,4 @@
     Display all news, cut the text to 200 characters as a description, with a link to the full news with a button for details.
     On the full news, display a picture if it is in the news.
 </p>
+<p>Main code in parser/app/Http/Service/Parser</p>
