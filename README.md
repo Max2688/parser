@@ -1,6 +1,6 @@
-<p>Задача:</p>
+<p>Task:</p>
 <p>
-    Спарсить  первые 15 новостей с rbc.ru (sidebar) и вставить в базу данных.
-    Вывести все новости, сократив текст до 200 символов в качестве описания, со ссылкой на полную новость с кнопкой подробнее.
-    На полной новости выводить картинку если есть в новости.
+    Parse the first 15 news from rbc.ru (sidebar) and insert into the database.
+    Display all news, cut the text to 200 characters as a description, with a link to the full news with a button for details.
+    On the full news, display a picture if it is in the news.
 </p>
