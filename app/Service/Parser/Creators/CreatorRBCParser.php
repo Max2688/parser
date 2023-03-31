@@ -1,14 +1,17 @@
 <?php
 
-namespace  App\Http\Service\Parser\Creators;
+namespace  App\Service\Parser\Creators;
 
-use App\Http\Service\Parser\ParserFactory;
-use App\Http\Service\Parser\ParsersRbc\RBCParser;
+use App\Service\Parser\IParser;
+use App\Service\Parser\ParserFactory;
+use App\Service\Parser\ParsersRbc\RBCParser;
 use Symfony\Component\DomCrawler\Crawler;
-use App\Http\Service\Parser\IParser;
 
 class CreatorRBCParser extends ParserFactory
 {
+    /**
+     * @var Crawler
+     */
     private $dom;
 
     public function __construct(Crawler $dom)
@@ -16,6 +19,9 @@ class CreatorRBCParser extends ParserFactory
         $this->dom = $dom;
     }
 
+    /**
+     * @return IParser
+     */
     public function getParser(): IParser
     {
         return new RBCParser($this->dom);

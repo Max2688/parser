@@ -1,21 +1,29 @@
 <?php
 
-namespace  App\Http\Service\Parser\Creators;
+namespace  App\Service\Parser\Creators;
 
-use App\Http\Service\Parser\ParserFactory;
-use App\Http\Service\Parser\ParsersRbc\AgroDigitalParser;
+use App\Service\Parser\IParser;
+use App\Service\Parser\ParserFactory;
+use App\Service\Parser\ParsersRbc\AgroDigitalParser;
 use Symfony\Component\DomCrawler\Crawler;
-use App\Http\Service\Parser\IParser;
 
 class CreatorAgroDigitalRbcParser extends ParserFactory
 {
+    /**
+     * @var Crawler
+     */
     private $dom;
-    const uri = "/agrodigital.rbc/iu";
+
+    const URI = "/agrodigital.rbc/iu";
+
     public function __construct(Crawler $dom)
     {
         $this->dom = $dom;
     }
 
+    /**
+     * @return IParser
+     */
     public function getParser(): IParser
     {
         return new AgroDigitalParser($this->dom);

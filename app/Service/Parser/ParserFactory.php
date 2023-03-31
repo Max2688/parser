@@ -1,5 +1,5 @@
 <?php
-namespace App\Http\Service\Parser;
+namespace App\Service\Parser;
 
 abstract class ParserFactory
 {

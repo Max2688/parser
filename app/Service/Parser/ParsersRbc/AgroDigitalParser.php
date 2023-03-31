@@ -1,21 +1,26 @@
 <?php
-namespace App\Http\Service\Parser\ParsersRbc;
+namespace App\Service\Parser\ParsersRbc;
 
-use App\Http\Service\Parser\IParser;
+use App\Service\Parser\IParser;
 use Symfony\Component\DomCrawler\Crawler;
 
 class AgroDigitalParser implements IParser
 {
-    private $dom;
+    /**
+     * @var Crawler
+     */
+    private Crawler $dom;
 
     public function __construct(Crawler $dom)
     {
         $this->dom = $dom;
     }
 
+    /**
+     * @return string
+     */
     public function title()
     {
-        // TODO: Implement title() method.
         try{
             $title = $this->dom->filter('.article__header .article__header__title .js-slide-title');
             return $title->html();
@@ -25,9 +30,11 @@ class AgroDigitalParser implements IParser
 
     }
 
+    /**
+     * @return string
+     */
     public function description()
     {
-        // TODO: Implement description() method.
         try{
             $description = $this->dom->filter('.article .article__body');
             return $description->html();
@@ -37,9 +44,11 @@ class AgroDigitalParser implements IParser
 
     }
 
+    /**
+     * @return string
+     */
     public function imageUri()
     {
-        // TODO: Implement image() method.
         try{
             $image = $this->dom->filter('.article__image--main img');
             return $image->image()->getUri();

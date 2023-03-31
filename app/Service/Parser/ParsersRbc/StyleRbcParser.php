@@ -1,21 +1,27 @@
 <?php
-namespace App\Http\Service\Parser\ParsersRbc;
+namespace App\Service\Parser\ParsersRbc;
 
-use App\Http\Service\Parser\IParser;
-use Symfony\Component\DomCrawler\Crawler;
+use App\Service\Parser\IParser;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\DomCrawler\Crawler;
+
 class StyleRbcParser implements IParser
 {
-    private $dom;
+    /**
+     * @var Crawler
+     */
+    private Crawler $dom;
 
     public function __construct(Crawler $dom)
     {
         $this->dom = $dom;
     }
 
+    /**
+     * @return string
+     */
     public function title()
     {
-        // TODO: Implement title() method.
         try{
             $title = $this->dom->filter('.js-article-header .article__header');
             return  $title->html();
@@ -23,12 +29,13 @@ class StyleRbcParser implements IParser
             Log::info($e->getMessage());
             return  '';
         }
-
     }
 
+    /**
+     * @return string
+     */
     public function description()
     {
-        // TODO: Implement description() method.
         try{
             $description = $this->dom->filter('.article .article__text');
             return  $description->html();
@@ -36,12 +43,13 @@ class StyleRbcParser implements IParser
             Log::info($e->getMessage());
             return  '';
         }
-
     }
 
+    /**
+     * @return string
+     */
     public function  imageUri()
     {
-        // TODO: Implement image() method.
         try{
             $image = $this->dom->filter('.article__main-image__inner .js-rbcslider-image');
             return $image->image()->getUri();

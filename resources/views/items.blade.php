@@ -55,10 +55,10 @@
                         <p><strong>{!! $new->title !!}</strong></p>
                     </div>
                     <div>
-                        <img src="{{asset('storage') . '/' . $new->image}}" />
+                        <img src="{{$new->image}}" title=""/>
                     </div>
                     <div>
-                        {!! $new->description !!}
+                        {!! $new->short_desc !!}
                     </div>
                 </div>
             @endforeach

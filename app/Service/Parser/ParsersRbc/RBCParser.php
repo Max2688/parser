@@ -1,55 +1,61 @@
 <?php
-namespace App\Http\Service\Parser\ParsersRbc;
+namespace App\Service\Parser\ParsersRbc;
 
-use App\Http\Service\Parser\IParser;
-use Symfony\Component\DomCrawler\Crawler;
+use App\Service\Parser\IParser;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\DomCrawler\Crawler;
 
-class AutonewsParser implements IParser
+class RBCParser implements IParser
 {
-    private $dom;
+    /**
+     * @var Crawler
+     */
+    private Crawler $dom;
 
     public function __construct(Crawler $dom)
     {
         $this->dom = $dom;
     }
 
+    /**
+     * @return string
+     */
     public function title()
     {
-        // TODO: Implement title() method.
         try{
-            $title = $this->dom->filter('.article__header  .js-slide-title');
+            $title = $this->dom->filter('.article__header__title-in');
             return $title->html();
         } catch (\InvalidArgumentException $e){
             Log::info($e->getMessage());
             return '';
         }
-
     }
 
+    /**
+     * @return string
+     */
     public function description()
     {
-        // TODO: Implement description() method.
         try{
-            $description = $this->dom->filter('.article .article__text');
+            $description = $this->dom->filter('.article__text');
             return $description->html();
         } catch (\InvalidArgumentException $e){
             Log::info($e->getMessage());
             return '';
         }
-
     }
 
+    /**
+     * @return string
+     */
     public function imageUri()
     {
-        // TODO: Implement image() method.
         try{
-            $image = $this->dom->filter('.article__main-image__image img');
+            $image = $this->dom->filter('.article__main-image__image');
             return $image->image()->getUri();
         } catch (\InvalidArgumentException $e){
             Log::info($e->getMessage());
             return 'https://via.placeholder.com/728x320.png';
         }
-
     }
 }

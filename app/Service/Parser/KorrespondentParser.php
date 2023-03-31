@@ -1,21 +1,26 @@
 <?php
-namespace App\Http\Service\Parser;
+namespace App\Service\Parser;
 
-use App\Http\Service\Parser\IParser;
-use Symfony\Component\DomCrawler\Crawler;
 use Illuminate\Support\Facades\Log;
+use Symfony\Component\DomCrawler\Crawler;
+
 class KorrespondentParser implements IParser
 {
-    private $dom;
+    /**
+     * @var Crawler
+     */
+    private Crawler $dom;
 
     public function __construct(Crawler $dom)
     {
         $this->dom = $dom;
     }
 
+    /**
+     * @return string
+     */
     public function title()
     {
-        // TODO: Implement title() method.
         try{
             $title = $this->dom->filter('.post-item__title');
             return $title->html();
@@ -23,12 +28,13 @@ class KorrespondentParser implements IParser
             Log::info($e->getMessage());
             return '';
         }
-
     }
 
+    /**
+     * @return string
+     */
     public function description()
     {
-        // TODO: Implement description() method.
         try{
             $description = $this->dom->filter('.post-item__text');
             return $description->html();
@@ -39,9 +45,11 @@ class KorrespondentParser implements IParser
 
     }
 
+    /**
+     * @return string
+     */
     public function imageUri()
     {
-        // TODO: Implement image() method.
         try{
             $image = $this->dom->filter('.post-item__big-photo-img');
             return  $image->image()->getUri();
@@ -49,6 +57,5 @@ class KorrespondentParser implements IParser
             Log::info($e->getMessage());
             return 'https://via.placeholder.com/728x320.png';
         }
-
     }
 }

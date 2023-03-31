@@ -18,4 +18,3 @@ Route::get('/', function () {
 });
 
 Route::get('articles','PostController@index');
-Route::get('init','ParserController@initParser');
