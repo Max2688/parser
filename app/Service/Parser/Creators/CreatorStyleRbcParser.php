@@ -9,17 +9,14 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class CreatorStyleRbcParser extends ParserFactory
 {
+    const URI = "/style.rbc/iu";
+
     /**
      * @var Crawler
      */
-    private Crawler $dom;
-
-    const URI = "/style.rbc/iu";
-
-    public function __construct(Crawler $dom)
-    {
-        $this->dom = $dom;
-    }
+    public function __construct(
+        private Crawler $dom
+    ){}
 
     /**
      * @return IParser

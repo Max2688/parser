@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Service\Contracts\FileServiceContract;
+use App\Service\Contracts\ParserServiceContract;
+use App\Service\FileService;
+use App\Service\Parser\ParserService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +17,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->app->bind(
+            FileServiceContract::class,
+            FileService::class
+        );
 
+        $this->app->bind(
+            ParserServiceContract::class,
+            ParserService::class
+        );
     }
 
     /**

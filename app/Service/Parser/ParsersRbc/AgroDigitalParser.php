@@ -2,6 +2,7 @@
 namespace App\Service\Parser\ParsersRbc;
 
 use App\Service\Parser\IParser;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\DomCrawler\Crawler;
 
 class AgroDigitalParser implements IParser
@@ -9,53 +10,53 @@ class AgroDigitalParser implements IParser
     /**
      * @var Crawler
      */
-    private Crawler $dom;
-
-    public function __construct(Crawler $dom)
-    {
-        $this->dom = $dom;
-    }
+    public function __construct(
+        private Crawler $dom
+    ){}
 
     /**
-     * @return string
+     * @inheritDoc
      */
-    public function title()
+    public function title(): string
     {
         try{
             $title = $this->dom->filter('.article__header .article__header__title .js-slide-title');
             return $title->html();
         } catch (\InvalidArgumentException $e){
-            return  '';
+            Log::info($e->getMessage());
         }
 
+        return  '';
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
-    public function description()
+    public function description(): string
     {
         try{
             $description = $this->dom->filter('.article .article__body');
             return $description->html();
         } catch (\InvalidArgumentException $e){
-            return  '';
+            Log::info($e->getMessage());
         }
 
+        return  '';
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
-    public function imageUri()
+    public function imageUri(): string
     {
         try{
             $image = $this->dom->filter('.article__image--main img');
             return $image->image()->getUri();
         } catch (\InvalidArgumentException $e){
-            return  'https://via.placeholder.com/728x320.png';
+            Log::info($e->getMessage());
         }
 
+        return  'https://via.placeholder.com/728x320.png';
     }
 
 }

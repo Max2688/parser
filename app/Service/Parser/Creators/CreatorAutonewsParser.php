@@ -9,17 +9,15 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class CreatorAutonewsParser extends ParserFactory
 {
+    const URI = "/autonews.ru/iu";
+
     /**
      * @var Crawler
      */
-    private Crawler $dom;
+    public function __construct(
+        private Crawler $dom
+    ){}
 
-    const URI = "/autonews.ru/iu";
-
-    public function __construct(Crawler $dom)
-    {
-        $this->dom = $dom;
-    }
 
     /**
      * @return IParser

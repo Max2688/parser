@@ -3,7 +3,18 @@ namespace App\Service\Parser;
 
 interface IParser
 {
-    public function title();
-    public function description();
-    public function imageUri();
+    /**
+     * @return string
+     */
+    public function title(): string;
+
+    /**
+     * @return string
+     */
+    public function description(): string;
+
+    /**
+     * @return string
+     */
+    public function imageUri(): string;
 }

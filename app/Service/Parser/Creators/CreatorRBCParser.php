@@ -12,12 +12,9 @@ class CreatorRBCParser extends ParserFactory
     /**
      * @var Crawler
      */
-    private $dom;
-
-    public function __construct(Crawler $dom)
-    {
-        $this->dom = $dom;
-    }
+    public function __construct(
+        private Crawler $dom
+    ){}
 
     /**
      * @return IParser

@@ -2,6 +2,7 @@
 
 namespace  App\Service\Parser;
 
+use App\Service\Contracts\ParserServiceContract;
 use App\Service\Parser\Creators\CreatorAgroDigitalRbcParser;
 use App\Service\Parser\Creators\CreatorAutonewsParser;
 use App\Service\Parser\Creators\CreatorKorrespondentParser;
@@ -12,11 +13,10 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\DomCrawler\Crawler;
 
-class ParserService
+class ParserService implements ParserServiceContract
 {
     /**
-     * @param string $url
-     * @return string
+     * @inheritDoc
      */
     public function getHttpResponse(string $url): string
     {
@@ -31,19 +31,17 @@ class ParserService
     }
 
     /**
-     * @param string $html
-     * @return Crawler
+     * @inheritDoc
      */
-    public function getCrawler(string $html)
+    public function getCrawler(string $html): Crawler
     {
         return new Crawler($html);
     }
 
     /**
-     * @param Crawler $crawler
-     * @return array
+     * @inheritDoc
      */
-    public function getLinksFromNodeSelector(Crawler $crawler, string $nodeSelector)
+    public function getLinksFromNodeSelector(Crawler $crawler, string $nodeSelector): array
     {
         return $crawler->filter($nodeSelector)->each(function (Crawler $node){
             return $node->link()->getUri();
@@ -51,10 +49,9 @@ class ParserService
     }
 
     /**
-     * @param string $url
-     * @return IParser
+     * @inheritDoc
      */
-    public function getCurrentParser(string $url)
+    public function getCurrentParser(string $url): IParser
     {
         $html = $this->getHttpResponse($url);
         $crawler = $this->getCrawler($html);

@@ -9,17 +9,15 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class CreatorAgroDigitalRbcParser extends ParserFactory
 {
+    const URI = "/agrodigital.rbc/iu";
+
     /**
      * @var Crawler
      */
-    private $dom;
+    public function __construct(
+        private Crawler $dom
+    ){}
 
-    const URI = "/agrodigital.rbc/iu";
-
-    public function __construct(Crawler $dom)
-    {
-        $this->dom = $dom;
-    }
 
     /**
      * @return IParser

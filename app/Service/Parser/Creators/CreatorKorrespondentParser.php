@@ -9,17 +9,15 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class CreatorKorrespondentParser extends ParserFactory
 {
+    const URI = "/korrespondent.net/iu";
+
     /**
      * @var Crawler
      */
-    private Crawler $dom;
+    public function __construct(
+        private Crawler $dom
+    ){}
 
-    const URI = "/korrespondent.net/iu";
-
-    public function __construct(Crawler $dom)
-    {
-        $this->dom = $dom;
-    }
 
     /**
      * @return IParser

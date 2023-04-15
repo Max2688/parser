@@ -9,17 +9,14 @@ class KorrespondentParser implements IParser
     /**
      * @var Crawler
      */
-    private Crawler $dom;
-
-    public function __construct(Crawler $dom)
-    {
-        $this->dom = $dom;
-    }
+    public function __construct(
+        private Crawler $dom
+    ){}
 
     /**
-     * @return string
+     * @inheritDoc
      */
-    public function title()
+    public function title(): string
     {
         try{
             $title = $this->dom->filter('.post-item__title');
@@ -31,9 +28,9 @@ class KorrespondentParser implements IParser
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
-    public function description()
+    public function description(): string
     {
         try{
             $description = $this->dom->filter('.post-item__text');
@@ -46,9 +43,9 @@ class KorrespondentParser implements IParser
     }
 
     /**
-     * @return string
+     * @inheritDoc
      */
-    public function imageUri()
+    public function imageUri(): string
     {
         try{
             $image = $this->dom->filter('.post-item__big-photo-img');

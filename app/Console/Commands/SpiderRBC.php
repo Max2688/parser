@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Post;
-use App\Service\FileService;
+use App\Service\Contracts\FileServiceContract;
+use App\Service\Contracts\ParserServiceContract;
 use App\Service\Parser\IParser;
-use App\Service\Parser\ParserService;
 use Illuminate\Console\Command;
 
 class SpiderRBC extends Command
@@ -26,21 +26,16 @@ class SpiderRBC extends Command
      */
     protected $description = 'Parse news from sidebar';
 
-    private ParserService $parserService;
-
-    private FileService $fileService;
     /**
      * Create a new command instance.
      *
      * @return void
      */
     public function __construct(
-        ParserService $parserService,
-        FileService $fileService,
+        private ParserServiceContract $parserService,
+        private FileServiceContract $fileService,
     ){
         parent::__construct();
-        $this->parserService = $parserService;
-        $this->fileService = $fileService;
     }
 
     /**
